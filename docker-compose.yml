@@ -1,0 +1,118 @@
+version: "3.7"
+services:
+
+# Alephium full node, also called a broker
+  broker:
+    image: "alephium/alephium:v1.1.3"
+    restart: unless-stopped
+    depends_on:
+      - init
+    ports:
+      - 9973:9973/tcp
+      - 9973:9973/udp
+      - 10973:10973/tcp
+      - 12973:12973/tcp
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./alephium/data:/alephium-home/.alephium
+      - ./alephium/wallets:/alephium-home/.alephium-wallet
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: 100m
+
+# Mining companion, creating mining wallet (if not set) and configuring the broker with it
+  mining-companion:
+    image: touilleio/alephium-mining-companion:v5
+    restart: unless-stopped
+    depends_on:
+      - broker
+    ports:
+      - 8080/tcp
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - ALEPHIUM_ENDPOINT=http://broker:12973
+      - LOG_LEVEL=info
+      - WALLET_NAME=$miningWalletName
+      - WALLET_PASSWORD=$miningWalletPassword
+      - WALLET_MNEMONIC=$miningWalletMnemonic
+      - PRINT_MNEMONIC=$printMnemonic
+      - TRANSFER_ADDRESS=$miningTransferAddres
+
+# Timeserie db for storing the metrics
+  prometheus:
+    image: prom/prometheus:v2.29.2
+    restart: unless-stopped
+    depends_on:
+      - init
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/config/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=60d"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./prometheus/config:/etc/prometheus/config:ro
+      - ./prometheus/data:/prometheus
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
+
+# Log tailing and parsing
+  mtail:
+    image: touilleio/mtail:latest
+    restart: unless-stopped
+    command:
+      - "--progs"
+      - "/etc/mtail"
+      - "--logs"
+      - "/var/lib/docker/containers/*/*-json.log"
+      - "--logtostderr"
+    ports:
+      - "3903"
+    volumes:
+      - ./mtail-progs:/etc/mtail
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 1m
+
+# Dashboards
+#  grafana:
+#    image: grafana/grafana:7.2.1
+#    depends_on:
+#      - prometheus
+#    ports:
+#      - 3000:3000
+#    volumes:
+#      - ./grafana/data:/var/lib/grafana
+#      - ./grafana/provisioning/:/etc/grafana/provisioning/
+#    env_file:
+#      - ./grafana/config.monitoring
+#    restart: unless-stopped
+
+
+# Create required folders and gives proper permissions to them
+  init:
+    image: busybox
+    restart: "no"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /alephium/data /alephium/wallets /prometheus/data
+        chmod 0777 /alephium/data /alephium/wallets /prometheus/data
+    volumes:
+      - ./alephium:/alephium
+      - ./prometheus:/prometheus

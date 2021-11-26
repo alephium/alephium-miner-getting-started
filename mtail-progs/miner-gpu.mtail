@@ -1,0 +1,23 @@
+# GPU Miner (https://github.com/alephium/gpu-miner) metrics
+counter block_received
+counter block_found
+gauge megahashrate
+counter megahashrate_gpu by gpu
+
+/^.*message type: 0.*$/ {
+  block_received++
+}
+
+/^.*new block:.*$/ {
+  block_found++
+}
+
+# hashrate: 2256 MH/s ...
+/^.*hashrate: (\d+) MH.*$/ {
+  megahashrate = $1
+}
+
+# gpu0: 1106 MH/s
+/gpu(?P<gpu>\d+): (?P<hr>\d+) MH/ {
+  megahashrate_gpu[$gpu] = $hr
+}
