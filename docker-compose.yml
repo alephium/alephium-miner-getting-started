@@ -23,6 +23,29 @@ services:
         max-file: "10"
         max-size: 100m
 
+  miner:
+    image: alephium/gpu-miner:latest
+    command:
+      - "-a"
+      - "broker"
+    restart: unless-stopped
+    depends_on:
+      - broker
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: 10m
+
 # Mining companion, creating mining wallet (if not set) and configuring the broker with it
   mining-companion:
     image: touilleio/alephium-mining-companion:v5
