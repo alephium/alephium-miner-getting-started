@@ -5,7 +5,8 @@ echo "And reboot the server"
 
 export DEBIAN_FRONTEND=noninteractive
 export ENV TZ=UTC
-sudo apt update && sudo apt install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common git jq openssh-server net-tools htop iftop iotop haveged fail2ban docker.io
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y docker.io
 
 # docker-compose version supporting gpus
 wget https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64 && chmod +x docker-compose-Linux-x86_64 && sudo mv docker-compose-Linux-x86_64 /usr/bin/docker-compose

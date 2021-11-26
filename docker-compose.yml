@@ -3,7 +3,7 @@ services:
 
 # Alephium full node, also called a broker
   broker:
-    image: "alephium/alephium:v1.1.3"
+    image: "alephium/alephium:latest"
     restart: unless-stopped
     depends_on:
       - init
