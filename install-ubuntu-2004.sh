@@ -5,7 +5,7 @@ echo "And reboot the server"
 
 export DEBIAN_FRONTEND=noninteractive
 export ENV TZ=UTC
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
 sudo apt install -y docker.io
 
 # docker-compose version supporting gpus
