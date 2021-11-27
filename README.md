@@ -17,7 +17,17 @@ The setup contains multiple parts, a.k.a:
 - [mtail](), to collect miner metrics
 - [grafana](), a metrics visualisation tool, because metrics are king :)
 
+
+
 # Use it
+
+## One step install
+
+```shell
+curl -L https://github.com/touilleio/alephium-miner-setup/raw/master/bootstrap-ubuntu2004.sh | bash
+```
+
+## More detailed steps
 
 The following steps are best run as root: `sudo su -`
 
@@ -39,7 +49,7 @@ The script will also *REBOOT* the node, so make sure nothing important can be lo
 
 ## Run!
 
-The whole stack can be startred via docker-compose, such as:
+The whole stack can be started via docker-compose, such as:
 ```shell
 docker-compose up -d
 ```

@@ -1,14 +1,9 @@
 # GPU Miner (https://github.com/alephium/gpu-miner) metrics
-counter block_received
 counter block_found
 gauge megahashrate
-counter megahashrate_gpu by gpu
+gauge megahashrate_gpu by gpu
 
-/^.*message type: 0.*$/ {
-  block_received++
-}
-
-/^.*new block:.*$/ {
+/^.*new block mined:.*$/ {
   block_found++
 }
 
