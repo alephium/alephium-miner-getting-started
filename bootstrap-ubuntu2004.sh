@@ -25,4 +25,4 @@ envsubst < alephium.service | sudo tee /etc/systemd/system/alephium.service
 sudo systemctl daemon-reload
 sudo systemctl enable alephium
 
-sudo ./install-ubuntu2004.sh
+./install-ubuntu2004.sh
