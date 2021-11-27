@@ -17,60 +17,43 @@ The setup contains multiple parts, a.k.a:
 - [mtail](), to collect miner metrics
 - [grafana](), a metrics visualisation tool, because metrics are king :)
 
-
-
-# Use it
-
-## One step install
+# One step install
 
 ```shell
 curl -L https://raw.githubusercontent.com/touilleio/alephium-miner-setup/main/bootstrap-ubuntu2004.sh | bash
 ```
 
-## More detailed steps
+# Getting logs (FAQ)
 
-The following steps are best run as root: `sudo su -`
-
-## Clone the repo
-
+For the miner:
 ```shell
-git clone https://github.com/touilleio/alephium-miner-setup.git
-cd alephium-miner-setup
+cd $HOME/alephium-miner-setup; docker-compose logs miner
 ```
 
-## Run the install script
-
-This script will install the required components as well as the Nvidia drivers.
-The script will also *REBOOT* the node, so make sure nothing important can be lost during the reboot.
-
+To get mined blocks:
 ```shell
-./install-ubuntu-2004.sh
+cd $HOME/alephium-miner-setup; docker-compose logs miner | grep -i mined
 ```
 
-## Run!
-
-The whole stack can be started via docker-compose, such as:
+For the broker:
 ```shell
-docker-compose up -d
+cd $HOME/alephium-miner-setup; docker-compose logs broker
 ```
 
-## What's going on?
+To retrieve the mnemonic of your mining wallet:
+```shell
+cd $HOME/alephium-miner-setup; docker-compose logs mining-companion | grep "SENSITIVE"
+```
+
+# What's going on under the hood?
+
+At startup, a service called alephium is started (`/etc/systemd/system/alephium.service`). It will perform
+the following operation, in sequence:
 
 1. The init container creates the required directory structure with some permissive permissions.
-2. The broker starts, connect to the mainnet, and start synching
+2. The broker starts, connect to the `mainnet`, and start synching
 3. The mining companion starts, and check is a mining wallet exists. If no, it creates one, printing the mnemonics in the logs (see below how to get the logs)
 4. The mining companion configures the mining key of the broker
 5. The miner waits (container restart) until the broker is synched with the chain, and starts mining.
 
 And that's it, the whole process takes about 20 minutes at the time of writing.
-
-## Getting logs
-
-To browse logs of the miner, use again docker-compose from the `alephium-miner-setup` folder
-```shell
-docker-compose logs -f miner
-```
-
-For the logs of the `broker`, replace `miner` with `broker`. For `mining-companion`,
-replace `miner` with `mining-companion`.
-And so on.
