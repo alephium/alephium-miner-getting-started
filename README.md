@@ -24,7 +24,7 @@ The setup contains multiple parts, a.k.a:
 ## One step install
 
 ```shell
-curl -L https://github.com/touilleio/alephium-miner-setup/raw/master/bootstrap-ubuntu2004.sh | bash
+curl -L https://raw.githubusercontent.com/touilleio/alephium-miner-setup/main/bootstrap-ubuntu2004.sh | bash
 ```
 
 ## More detailed steps
