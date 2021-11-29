@@ -2,7 +2,9 @@ Getting startred with Alephium Miner
 ====
 
 This repository contains all the material needed to start [mining](https://wiki.alephium.org/GPU-Miner-Guide.html)
-on [Alephium blockchain](https://alephium.org). ⚠️⚠️⚠️ But please keep in mind this is not a production setup, *use it at your own risks*!
+on [Alephium blockchain](https://alephium.org).
+
+> ⚠️⚠️⚠️ Please keep in mind this is not a production setup, *use it at your own risks*!
 
 It is based on [docker](https://www.docker.com/), [docker-compose](https://docs.docker.com/compose/) and [ubuntu linux version 20.04](https://ubuntu.com/),
 and works out of the box with this setup.
