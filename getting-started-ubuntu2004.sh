@@ -2,7 +2,7 @@
 
 echo "Welcome to the getting started guide to run Alephium miner"
 echo "This process will install required packages and reboot the server"
-echo "It Ctrl+C now if you don't want that."
+echo "Hit Ctrl+C now if you don't want that."
 
 sleep 3
 
