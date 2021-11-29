@@ -9,7 +9,7 @@ sudo apt update && sudo apt upgrade -y -o Dpkg::Options::="--force-confdef" -o D
 sudo apt install -y docker.io
 
 # Ensure the current user is part of the docker group
-sudo usermod -G docker $USER
+sudo usermod -a -G docker $USER
 
 # docker-compose version supporting gpus
 wget https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64 && chmod +x docker-compose-Linux-x86_64 && sudo mv docker-compose-Linux-x86_64 /usr/bin/docker-compose
