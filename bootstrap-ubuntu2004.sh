@@ -2,6 +2,8 @@
 
 which git || sudo apt install -y git
 
+cd $HOME
+
 git clone https://github.com/touilleio/alephium-miner-setup.git
 cd alephium-miner-setup
 
