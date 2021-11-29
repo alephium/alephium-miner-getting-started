@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+echo "Welcome to the getting started guide to run Alephium miner"
+echo "This process will install required packages and reboot the server"
+echo "It Ctrl+C now if you don't want that."
+
+sleep 3
+
 which git || sudo apt install -y git
 
 git clone https://github.com/touilleio/alephium-miner-setup.git $HOME/.alephium-miner-setup
@@ -44,7 +50,7 @@ envsubst < alephium.service | sudo tee /etc/systemd/system/alephium.service
 sudo systemctl daemon-reload
 sudo systemctl enable alephium
 
-./install-ubuntu2004.sh
+./package-install-ubuntu2004.sh
 
 echo "Install of the required components is now completed, rebooting to finish the setup."
 

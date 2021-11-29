@@ -20,7 +20,7 @@ The setup contains multiple parts, a.k.a:
 # One step install
 
 ```shell
-curl -L https://raw.githubusercontent.com/touilleio/alephium-miner-setup/main/bootstrap-ubuntu2004.sh | bash
+curl -L https://raw.githubusercontent.com/alephium/alephium-miner-getting-started/main/getting-started-ubuntu2004.sh | bash
 ```
 
 ## What's next?
