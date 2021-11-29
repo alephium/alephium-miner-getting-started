@@ -25,7 +25,7 @@ curl -L https://raw.githubusercontent.com/touilleio/alephium-miner-setup/main/bo
 
 ## What's next?
 
-Next you can edit the file `$HOME/alephium-miner-setup/.env`, and particularly
+Next you can edit the file `$HOME/.alephium-miner-setup/.env`, and particularly
 configure an transfer address under the config parameter `miningTransferAddress`.
 The mining companion will start transferring the mined ALPH to this wallet every 15 minutes.
 
@@ -35,22 +35,22 @@ Get involvement in the vibrant community in the [Alephium Discord server](https:
 
 For the miner:
 ```shell
-cd $HOME/alephium-miner-setup; docker-compose logs miner
+cd $HOME/.alephium-miner-setup; docker-compose logs miner
 ```
 
 To get mined blocks:
 ```shell
-cd $HOME/alephium-miner-setup; docker-compose logs miner | grep -i mined
+cd $HOME/.alephium-miner-setup; docker-compose logs miner | grep -i mined
 ```
 
 For the broker:
 ```shell
-cd $HOME/alephium-miner-setup; docker-compose logs broker
+cd $HOME/.alephium-miner-setup; docker-compose logs broker
 ```
 
 To retrieve the mnemonic of your mining wallet:
 ```shell
-cd $HOME/alephium-miner-setup; docker-compose logs mining-companion | grep "SENSITIVE"
+cd $HOME/.alephium-miner-setup; docker-compose logs mining-companion | grep "SENSITIVE"
 ```
 
 # What's going on under the hood?
