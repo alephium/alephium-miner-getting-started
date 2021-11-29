@@ -23,6 +23,14 @@ The setup contains multiple parts, a.k.a:
 curl -L https://raw.githubusercontent.com/touilleio/alephium-miner-setup/main/bootstrap-ubuntu2004.sh | bash
 ```
 
+## What's next?
+
+Next you can edit the file `$HOME/alephium-miner-setup/.env`, and particularly
+configure an transfer address under the config parameter `miningTransferAddress`.
+The mining companion will start transferring the mined ALPH to this wallet every 15 minutes.
+
+Get involvement in the vibrant community in the [Alephium Discord server](https://discord.gg/JErgRBfRSB).
+
 # Getting logs (FAQ)
 
 For the miner:
