@@ -2,10 +2,8 @@
 
 which git || sudo apt install -y git
 
-cd $HOME
-
-git clone https://github.com/touilleio/alephium-miner-setup.git
-cd alephium-miner-setup
+git clone https://github.com/touilleio/alephium-miner-setup.git $HOME/.alephium-miner-setup
+cd $HOME/.alephium-miner-setup
 
 cat <<EOF | sudo tee /etc/motd
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -29,11 +27,14 @@ MMMMMMMMMMMMMMk.   .,OMMMMMNOxkOKXNMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMXxdxO0XWMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 
-Welcome to this alephium miner. All the required files are in $HOME/alephium-miner-setup.
+Welcome to this alephium miner. All the required files are in $HOME/.alephium-miner-setup
 Everything automatically start at server boot / reboot.
 
-# Get the logs of the miner
-cd $HOME/alephium-miner-setup; docker-compose logs miner
+!! This is not a production-ready setup, use it at your own risk !!
+
+# Get the logs of the miner:
+cd $HOME/.alephium-miner-setup
+docker-compose logs miner
 
 Enjoy mining Alephium!
 
@@ -44,3 +45,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable alephium
 
 ./install-ubuntu2004.sh
+
+echo "Install of the required components is now completed, rebooting to finish the setup."
+
+sudo reboot
