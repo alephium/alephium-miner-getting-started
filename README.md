@@ -1,4 +1,4 @@
-Getting startred with Alephium Miner
+Getting started with Alephium Miner
 ====
 
 This repository contains all the material needed to start [mining](https://wiki.alephium.org/GPU-Miner-Guide.html)
