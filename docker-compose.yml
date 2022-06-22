@@ -63,7 +63,7 @@ services:
       - WALLET_PASSWORD=$miningWalletPassword
       - WALLET_MNEMONIC=$miningWalletMnemonic
       - PRINT_MNEMONIC=$printMnemonic
-      - TRANSFER_ADDRESS=$miningTransferAddres
+      - TRANSFER_ADDRESS=$miningTransferAddress
 
 # Timeserie db for storing the metrics
   prometheus:
